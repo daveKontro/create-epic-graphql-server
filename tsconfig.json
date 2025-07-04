@@ -1,0 +1,41 @@
+{
+  "ts-node": {
+    "transpileOnly": true,
+    "files": true,
+    "compilerOptions": {}
+  },
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "baseUrl": "server/src",
+    "preserveConstEnums": true,
+    "target": "es6",
+    "pretty": true,
+    "sourceMap": true,
+    "strict": true,
+    "outDir": "./server/build",
+    "types": [
+      "@types/chai",
+      "@types/chalk",
+      "@types/dotenv-flow",
+      "@types/express",
+      "@types/mocha",
+      "@types/node",
+      "@types/sinon",
+      "@types/supertest"
+    ],
+  },
+  "include": [
+    "server/src/**/*"
+  ],
+  "exclude": [
+    "./.env*",
+    "node_modules",
+    "bin",
+    ".vscode",
+    "*.json5",
+    "**/*.specs.ts",
+    "**/*.test.ts"
+  ]
+}

@@ -1,0 +1,7 @@
+.eslintrc.js
+node_modules
+.vscode
+specs
+bin
+server/src/build
+tsconfig.json

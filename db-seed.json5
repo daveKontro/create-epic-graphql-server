@@ -1,0 +1,37 @@
+{
+  customers: [
+    {
+      id: '1',
+      name: 'Jane Doe',
+      email: 'jane@example.com',
+      phone: '555-1234'
+    },
+    {
+      id: '2',
+      name: 'John Smith',
+      email: 'john@example.com',
+      phone: '555-9876'
+    }
+  ],
+  orders: [
+    {
+      id: '1',
+      name: 'Product One',
+      notes: 'Urgent delivery',
+      status: 'Processing',
+      customerId: '1'
+    },
+    {
+      id: '2',
+      name: 'Product Two',
+      status: 'Not Started',
+      customerId: '2'
+    },
+    {
+      id: '3',
+      name: 'Product Three',
+      status: 'Not Started',
+      customerId: '1'
+    }
+  ]
+}

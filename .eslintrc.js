@@ -1,0 +1,198 @@
+module.exports = {
+  root: true,
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'script',
+    project: ['./tsconfig.json'],
+    tsconfigRootDir: __dirname,
+  },
+  env: {
+    node: true,
+    es2021: true,
+  },
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+  ],
+  plugins: [
+    '@typescript-eslint',
+  ],
+  rules: {
+    // 📜 @typescript-eslint
+    'quotes': 'off',
+    '@typescript-eslint/quotes': ['error', 'single'],
+    'no-dupe-class-members': 'off',  // handled by .ts
+    'no-undef': 'off',  // handled by .ts
+    '@typescript-eslint/consistent-type-assertions': 'error',
+    'no-array-constructor': 'off',
+    '@typescript-eslint/no-array-constructor': 'error',
+    'no-var': 'error',  // makes 'no-redeclare' irrelevant
+    // 'no-redeclare': 'off',  // see above
+    // '@typescript-eslint/no-redeclare': 'error',  // see above
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': [
+      'error',
+      {
+        'functions': true,
+        'classes': true,
+        'variables': true,
+        'allowNamedExports': true,
+        'enums': true,
+        'typedefs': true,
+        'ignoreTypeReferences': true,
+      },
+    ],
+    'no-unused-expressions': 'off',
+    '@typescript-eslint/no-unused-expressions': [
+      'error',
+      {
+        'allowShortCircuit': true,
+        'allowTernary': true,
+        'allowTaggedTemplates': true,
+      },
+    ],
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        'args': 'none',
+        'ignoreRestSiblings': true,
+      },
+    ],
+    'no-useless-constructor': 'off',
+    '@typescript-eslint/no-useless-constructor': 'error',
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/consistent-type-imports': [
+      'warn',
+      {
+        prefer: 'type-imports',
+        disallowTypeAnnotations: false,
+      },
+    ],
+
+    // 📜 eslint
+    'array-callback-return': 'error',
+    'default-case': 'error',
+    'dot-location': ['error', 'property'],
+    'eqeqeq': ['error', 'always'],
+    'new-parens': 'error',
+    'no-caller': 'error',
+    'no-cond-assign': ['error', 'except-parens'],
+    'no-const-assign': 'error',
+    'no-control-regex': 'error',
+    'no-delete-var': 'error',
+    'no-dupe-args': 'error',
+    'no-dupe-keys': 'error',
+    'no-duplicate-case': 'error',
+    'no-empty-character-class': 'error',
+    'no-empty-pattern': 'error',
+    'no-eval': 'error',
+    'no-ex-assign': 'error',
+    'no-extend-native': 'error',
+    'no-extra-bind': 'error',
+    'no-extra-label': 'error',
+    'no-fallthrough': 'error',
+    'no-func-assign': 'error',
+    'no-implied-eval': 'error',
+    'no-invalid-regexp': 'error',
+    'no-iterator': 'error',
+    'no-label-var': 'error',
+    'no-labels': [
+      'error',
+      {
+        'allowLoop': true,
+        'allowSwitch': false,
+      },
+    ],
+    'no-lone-blocks': 'error',
+    'no-loop-func': 'error',
+    'no-mixed-operators': [
+      'error',
+      {
+        'groups': [
+          ['&', '|', '^', '~', '<<', '>>', '>>>'],
+          ['==', '!=', '===', '!==', '>', '>=', '<', '<='],
+          ['&&', '||'],
+          ['in', 'instanceof'],
+        ],
+        'allowSamePrecedence': false,
+      },
+    ],
+    'no-multi-str': 'error',
+    'no-native-reassign': 'error',
+    'no-negated-in-lhs': 'error',
+    'no-new-func': 'error',
+    'no-new-object': 'error',
+    'no-new-symbol': 'error',
+    'no-new-wrappers': 'error',
+    'no-obj-calls': 'error',
+    'no-octal': 'error',
+    'no-octal-escape': 'error',
+    'no-redeclare': 'error',
+    'no-regex-spaces': 'error',
+    'no-restricted-syntax': ['error', 'WithStatement'],
+    'no-script-url': 'error',
+    'no-self-assign': 'error',
+    'no-self-compare': 'error',
+    'no-sequences': 'error',
+    'no-shadow-restricted-names': 'error',
+    'no-sparse-arrays': 'error',
+    'no-template-curly-in-string': 'error',
+    'no-this-before-super': 'error',
+    'no-throw-literal': 'error',
+    'no-unreachable': 'error',
+    'no-unused-labels': 'error',
+    'no-useless-computed-key': 'error',
+    'no-useless-concat': 'error',
+    'no-useless-escape': 'error',
+    'no-useless-rename': [
+      'error',
+      {
+        'ignoreDestructuring': false,
+        'ignoreImport': false,
+        'ignoreExport': false,
+      },
+    ],
+    'no-with': 'error',
+    'no-whitespace-before-property': 'error',
+    'require-yield': 'error',
+    'rest-spread-spacing': ['error', 'never'],
+    'strict': ['error', 'never'],
+    'unicode-bom': ['error', 'never'],
+    'use-isnan': 'error',
+    'valid-typeof': 'error',
+    'getter-return': 'error',
+
+    // 📜 eslint, some additional styles
+    'array-element-newline': ['error', 'consistent'],
+    'comma-dangle': ['error', {
+      'arrays': 'always-multiline',
+      'objects': 'always-multiline',
+      'imports': 'always-multiline',
+      'exports': 'always-multiline',
+      // 'functions': 'never'
+    }],
+    'semi': ['error', 'never'],
+    'curly': ['error', 'multi-line'],
+    'indent': [
+      'error',
+      2,
+      {
+        'SwitchCase': 1,
+      },
+    ],
+    'arrow-spacing': ['error'],
+    'object-curly-spacing': ['error', 'always'],
+    'array-bracket-spacing': ['error', 'never'],
+    'no-irregular-whitespace': ['error'],
+    'eol-last': ['error', 'always'],
+    'no-trailing-spaces': [
+      'error',
+      {
+        'skipBlankLines': false,
+        'ignoreComments': true,
+      },
+    ],
+  },
+}

@@ -1,0 +1,6 @@
+{
+  "editor.parameterHints.enabled": false,
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "editor.snippetSuggestions": "none",
+  "editor.hover.enabled": false
+}
