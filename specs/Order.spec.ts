@@ -1,6 +1,6 @@
 const { expect } = require('chai')
-import { orderSchema } from '../server/src/models/Order'
-import { Product, Status } from '../server/src/typing/enums'
+import { orderSchema } from '../src/models/Order'
+import { Product, Status } from '../src/typing/enums'
 
 describe('orderSchema', () => {
   it('validates a correct order object', () => {

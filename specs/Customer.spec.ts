@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { customerSchema } from '../server/src/models/Customer'
+import { customerSchema } from '../src/models/Customer'
 
 describe('customerSchema', () => {
   it('accepts a valid customer object', () => {

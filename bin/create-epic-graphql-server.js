@@ -7,7 +7,7 @@ const { hideBin } = require('yargs/helpers')
 const packageJson = require('../package.json')
 
 const run = async () => {
-  const repo = 'https://github.com/daveKontro/create-graphql-server/tarball/main'
+  const repo = 'https://github.com/daveKontro/create-epic-graphql-server/tarball/main'
 
   const execCommand = (command) => {
     try {
@@ -24,13 +24,15 @@ const run = async () => {
   const argv = yargs(hideBin(process.argv)).argv
 
   if (!argv.name) {
-    console.error('WARNING add a project name like so: npx create-graphql-server --name={my-project}')
+    console.error('WARNING add a project name like so: npx create-epic-graphql-server --name={my-project}')
     process.exit(1)
   }
 
   const projectPaths = {
     root: path.resolve('.', argv.name),
     get bin() { return path.resolve(this.root, 'bin') },
+    get env() { return path.resolve(this.root, '.env') },
+    get packageJson() { return path.resolve(this.root, 'package.json') },
   }
 
   const isNameDotCommand = (argv.name === '.')
@@ -54,7 +56,6 @@ const run = async () => {
 
   execCommand(`rm ${projectPaths.packageJson}`)
   execCommand(`rm -rf ${projectPaths.bin}`)
-  execCommand(`rm -rf ${projectPaths.ccrate}`)
 
   try {
     await writeFile(projectPaths.packageJson, JSON.stringify(packageJson, null, 2), {
@@ -70,14 +71,9 @@ const run = async () => {
   // install project dependencies
   execCommand(`npm --prefix ${projectPaths.root} install`)
 
-  // run scripts
-  if (argv.ccrate) {
-    execCommand(`npm --prefix ${projectPaths.root} run test:updateSnapshot`)
-  }
-
   // finish up
   console.info('')
-  console.info('Thanks for using Create GraphQL Server!')
+  console.info('Thanks for using Create Epic GraphQL Server!')
 
   process.exit(0)
 }

@@ -2,7 +2,7 @@ const path = require('path')
 const chalk = require('chalk')
 const winston = require('winston')
 require('winston-daily-rotate-file')
-const packageJson = require('../../../package.json')
+const packageJson = require('../../package.json')
 import type { Logger } from 'winston'
 import type { Format } from 'logform'
 import { NodeEnv, LogLevel, LogFile } from '../typing/enums'

@@ -1,8 +1,8 @@
-![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FdaveKontro%2Fcreate-graphql-server%2Fmain%2Fpackage.json&query=%24.version&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABnUlEQVR4nO2bT0vEMBDFE+lBjCgoHvMx9Puf/Rq5eRGUIEIhngpS2HRet+nLn/ldM8m+fTuZLs3EGpzXFMP7jnmnYJ23UDz6ASmGhM45E9SAG3D9OzD+dNAfCDIgxRAxOfWDZkB3IAY8F1NxPE/SQHHBqL34rZEWQ90CwriXoioKIM1YkQEpho/r5NSLbgG2ADablbK16r9m62kwfAZMbAHzPBtjjJkmuZRlzgIydw3dgD3ir/nCa7rfAls1rHsDtlADcoOtPwIlaAawBbBRAzJj96epKEyull00IMXwXUZOXegWYAtgowawBbBRA9gC2KgBbAFs1AC2ADZqAFsAGzWALYCNGsAWwCZ7cNjLW+HcAenwGaAGsAWwUQPYAthkDbDOP5wlpBTW+dvc+FYG9HA28JsbpHSIrFtcFtDOj//r7O0aoRhwVIvLEesMXwRFHdWt/iWWdIwPnwFqgCTIOi++gdEa0gz4LKqiAHpjRMjwBkC3LFt5HCK3R4fPAMgA6/xjKSFHYZ2HrveiGfAFxjP4QYLhLWCdf0Pn1Mwf/j9N4kR1HlsAAAAASUVORK5CYII=&label=version&labelColor=%23ff883e&color=%23fff5e3)
-![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FdaveKontro%2Fcreate-graphql-server%2Fmain%2Fpackage.json&query=%24.engines.node&logo=nodedotjs&label=node&labelColor=%23ff883e&color=%23fff5e3)
+![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FdaveKontro%2Fcreate-epic-graphql-server%2Fmain%2Fpackage.json&query=%24.version&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABnUlEQVR4nO2bT0vEMBDFE+lBjCgoHvMx9Puf/Rq5eRGUIEIhngpS2HRet+nLn/ldM8m+fTuZLs3EGpzXFMP7jnmnYJ23UDz6ASmGhM45E9SAG3D9OzD+dNAfCDIgxRAxOfWDZkB3IAY8F1NxPE/SQHHBqL34rZEWQ90CwriXoioKIM1YkQEpho/r5NSLbgG2ADablbK16r9m62kwfAZMbAHzPBtjjJkmuZRlzgIydw3dgD3ir/nCa7rfAls1rHsDtlADcoOtPwIlaAawBbBRAzJj96epKEyull00IMXwXUZOXegWYAtgowawBbBRA9gC2KgBbAFs1AC2ADZqAFsAGzWALYCNGsAWwCZ7cNjLW+HcAenwGaAGsAWwUQPYAthkDbDOP5wlpBTW+dvc+FYG9HA28JsbpHSIrFtcFtDOj//r7O0aoRhwVIvLEesMXwRFHdWt/iWWdIwPnwFqgCTIOi++gdEa0gz4LKqiAHpjRMjwBkC3LFt5HCK3R4fPAMgA6/xjKSFHYZ2HrveiGfAFxjP4QYLhLWCdf0Pn1Mwf/j9N4kR1HlsAAAAASUVORK5CYII=&label=version&labelColor=%23ff883e&color=%23fff5e3)
+![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2FdaveKontro%2Fcreate-epic-graphql-server%2Fmain%2Fpackage.json&query=%24.engines.node&logo=nodedotjs&label=node&labelColor=%23ff883e&color=%23fff5e3)
 ![Static Badge](https://img.shields.io/badge/npm->=v10-%23fff5e3?logo=npm&labelColor=%23ff883e)
 
-# Create GraphQL Server
+# Create Epic GraphQL Server
 This module provides a configured [GraphQL](https://www.npmjs.com/package/graphql) server.  
 
 Having a preconfigured server will jump-start your project so you never have to begin from scratch.  
@@ -14,12 +14,12 @@ Interact with this project template live [here](https://www.creategraphqlserver.
 ## installation
 first install globally  
 ```
-npm install -g create-graphql-server
+npm install -g create-epic-graphql-server
 ```
 
 then create your project  
 ```
-npx create-graphql-server --name={my-project}
+npx create-epic-graphql-server --name={my-project}
 ```
 
 ## usage
@@ -41,7 +41,7 @@ in order to get up and running quickly without the need to initially plug into a
 
 the database starts when you run `npm run dev:db`, which automatically creates and runs of the file `db.json5`; the db file is seeded upon each startup from `db-seed.json`  
 
-see file `/server/src/config/db.ts` to understand how the database works; you will likely, eventually remove this file when you plug into a real database and replace the contents of `/server/src/models` with actual database models... that said, the provided pattern gives you scaffolding to build around  
+see file `/src/config/db.ts` to understand how the database works; you will likely, eventually remove this file when you plug into a real database and replace the contents of `/src/models` with actual database models... that said, the provided pattern gives you scaffolding to build around  
 
 ⚠️ please note this mock database is not intended or suited for production use ⚠️  
 
@@ -50,7 +50,7 @@ the schema sits at the heart of the GraphQL service
 
 the types describe what data you can query, and the schema is the collection of what the service provides  
 
-a sample schema has been configured in `/server/src/schema/schema` with model validation, read all, read on, mutations, etc... again, your usecase will necessitate alterations to the schema, but the provided pattern might help you along the way  
+a sample schema has been configured in `/src/schema/schema` with model validation, read all, read on, mutations, etc... again, your usecase will necessitate alterations to the schema, but the provided pattern might help you along the way  
 
 ## test suite
 the test suite is enabled to run unit and integration tests  

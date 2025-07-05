@@ -1,21 +1,21 @@
 {
-  "name": "create-graphql-server",
+  "name": "create-epic-graphql-server",
   "version": "0.1.0",
   "description": "a configured graphql server",
   "main": "index.js",
   "bin": {
-    "create-graphql-server": "bin/create-graphql-server.js"
+    "create-epic-graphql-server": "bin/create-epic-graphql-server.js"
   },
   "scripts": {
     "build": "tsc --build",
-    "start": "tsx ./server/src/index.ts",
-    "dev": "concurrently \"tsx watch ./server/src/index.ts\" \"npm run test:watch:min\"",
+    "start": "tsx ./src/index.ts",
+    "dev": "concurrently \"tsx watch ./src/index.ts\" \"npm run test:watch:min\"",
     "dev:db": "dotenv -e .env -- bash -c 'cp db-seed.json5 db.json5 && json-server db.json5 --port ${JSON_SERVER_PORT:-3210}'",
     "test": "mocha --require ts-node/register specs/**/*.ts",
-    "test:watch": "mocha --require ts-node/register specs/**/*.ts --watch --watch-files server/src/**/*.ts,specs/**/*.ts",
-    "test:watch:min": "mocha --require ts-node/register specs/**/*.ts --watch --watch-files server/src/**/*.ts,specs/**/*.ts --reporter min",
-    "lint": "eslint server/src/**/*.{ts,json}",
-    "lint:fix": "eslint --fix server/src/**/*.{ts,json}",
+    "test:watch": "mocha --require ts-node/register specs/**/*.ts --watch --watch-files src/**/*.ts,specs/**/*.ts",
+    "test:watch:min": "mocha --require ts-node/register specs/**/*.ts --watch --watch-files src/**/*.ts,specs/**/*.ts --reporter min",
+    "lint": "eslint src/**/*.{ts,json}",
+    "lint:fix": "eslint --fix src/**/*.{ts,json}",
     "prepare": "husky"
   },
   "keywords": [],

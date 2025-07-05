@@ -8,13 +8,13 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "baseUrl": "server/src",
+    "baseUrl": "src",
     "preserveConstEnums": true,
     "target": "es6",
     "pretty": true,
     "sourceMap": true,
     "strict": true,
-    "outDir": "./server/build",
+    "outDir": "./build",
     "types": [
       "@types/chai",
       "@types/chalk",
@@ -27,12 +27,13 @@
     ],
   },
   "include": [
-    "server/src/**/*"
+    "src/**/*"
   ],
   "exclude": [
     "./.env*",
     "node_modules",
     "bin",
+    "build",
     ".vscode",
     "*.json5",
     "**/*.specs.ts",

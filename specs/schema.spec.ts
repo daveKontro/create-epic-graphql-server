@@ -3,8 +3,8 @@ const request = require('supertest')
 const sinon = require('sinon')
 const express = require('express')
 const { createHandler } = require('graphql-http/lib/use/express')
-const { schema } = require('../server/src/schema/schema')
-const db = require('../server/src/config/db')
+const { schema } = require('../src/schema/schema')
+const db = require('../src/config/db')
 import type { SinonStub } from 'sinon' 
 
 const app = express()

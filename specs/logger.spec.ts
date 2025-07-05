@@ -1,7 +1,7 @@
 
 const { expect } = require('chai')
 const sinon = require('sinon')
-const logger = require('../server/src/utilities/logger')
+const logger = require('../src/utilities/logger')
 import type { SinonStub, SinonFakeTimers } from 'sinon'
 
 describe('CustomLogger', () => {

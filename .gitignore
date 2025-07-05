@@ -1,7 +1,8 @@
 notes.md
 *.http
 db.json5
-server/build
+build
+.vscode
 
 # Logs
 logs
