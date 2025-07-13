@@ -1,6 +1,6 @@
 {
   "name": "create-epic-graphql-server",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "a configured graphql server",
   "main": "index.js",
   "bin": {
@@ -18,7 +18,20 @@
     "lint:fix": "eslint --fix src/**/*.{ts,json}",
     "prepare": "husky"
   },
-  "keywords": [],
+  "keywords": [
+    "template",
+    "server",
+    "graphql",
+    "node",
+    "express",
+    "typescript",
+    "eslint",
+    "mocha",
+    "chai",
+    "sinon",
+    "supertest",
+    "javascript"
+  ],
   "author": "David Kontrovitz",
   "license": "MIT",
   "dependencies": {
@@ -30,6 +43,7 @@
     "express": "5.1.0",
     "graphql": "16.11.0",
     "graphql-http": "1.22.4",
+    "helmet": "8.1.0",
     "husky": "9.1.7",
     "json-server": "1.0.0-beta.3",
     "ruru": "2.0.0-beta.22",
