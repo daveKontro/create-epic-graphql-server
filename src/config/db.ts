@@ -3,11 +3,10 @@ const logger = require('../utilities/logger')
 import type { Customer } from '../models/Customer'
 import type { Order } from '../models/Order'
 import { DataSet } from '../typing/enums'
+import type { Err } from '../typing/types'
 import type * as I from '../typing/interfaces'
 
 require('dotenv-flow').config()
-
-const { log } = logger
 
 const crud = {
   url: `http://localhost:${process.env.JSON_SERVER_PORT || 3210}`,
@@ -19,12 +18,8 @@ const crud = {
     throw({ response }: { response: Response }) {
       throw new Error(`fetch failed with status ${response.status}`)
     },
-    handle({ err }:{ err: unknown }) {
-      if (err instanceof Error) {
-        log.error(`fetch error: ${err.message}`)
-      } else {
-        log.error(`unexpected fetch error: ${err}`)
-      }
+    handle({ err }: { err: Err }) {
+      logger.logErr({ header: 'fetch error', err })
     },
   },
   async create({ dataSet, doc }: I.Create) {

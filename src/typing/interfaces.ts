@@ -1,6 +1,7 @@
 import type { Customer } from '../models/Customer'
 import type { Order } from '../models/Order'
 import type * as enums from './enums'
+import type * as types from './types'
 
 interface DataSetOptions {
   dataSet: enums.DataSet,
@@ -31,3 +32,13 @@ export interface ReadOne extends Read, Id {}
 export interface Update extends DataSetOptions, Id, Patch {}
 
 export interface Delete extends DataSetOptions, Id {}
+
+export interface ErrorHandler {
+  header?: types.Msg,
+  err: types.Err,
+}
+
+export interface LogErr extends ErrorHandler {
+  meta?: object,
+  level?: enums.LogLevel.warn | enums.LogLevel.error,
+}

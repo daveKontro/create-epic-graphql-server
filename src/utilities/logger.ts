@@ -6,6 +6,8 @@ const packageJson = require('../../package.json')
 import type { Logger } from 'winston'
 import type { Format } from 'logform'
 import { NodeEnv, LogLevel, LogFile } from '../typing/enums'
+import type { Msg } from '../typing/types'
+import type { ErrorHandler, LogErr } from '../typing/interfaces'
 
 require('dotenv-flow').config()
 
@@ -14,7 +16,7 @@ const NODE_ENV = process.env.NODE_ENV as NodeEnv || NodeEnv.development
 // NOTE:
 // 1) production
 //   a) write log file in json to enable log analytics
-//   b) INFO logging enabled... to be used sparingly
+//   b) INFO logging enabled
 // 2) development
 //   a) display logs in console in more readable format, and 
 //      write to log files to align prod and dev behavior
@@ -139,12 +141,48 @@ class CustomLogger {
 
   logEnv = ({
     msg,
-  }:{
+  }: {
     msg: string,
   }) => {
     const env = chalk.grey(`[${NODE_ENV}]`)
 
     return this.log?.info(`${msg} ${env}`)
+  }
+
+  private errorHandler = ({
+    header,
+    err,
+  }: ErrorHandler): Msg => {
+    const myHeader: string = header
+      ? `${header}:`
+      : ''
+
+    if (err instanceof Error) {
+      return `${myHeader} ${err.message}`
+    } else {
+      return `unexpected ${myHeader} ${err}`
+    }
+  }
+
+  logErr = ({
+    header,
+    err,
+    meta = {},
+    level = LogLevel.error,
+  }: LogErr) => {
+    const msg = this.errorHandler({
+      err,
+      header,
+    })
+
+    switch(level) {
+      case LogLevel.warn:
+        return this.log?.warn(msg, { ...meta })
+      case LogLevel.error:
+        return this.log?.error(msg, { ...meta })
+      default:
+        return null
+    }
   }
 }
 

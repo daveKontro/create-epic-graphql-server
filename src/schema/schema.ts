@@ -9,15 +9,13 @@ const {
   GraphQLEnumType,
 } = require('graphql')
 const z = require('zod')
-const logger = require('../utilities/logger')
+const { log, logErr } = require('../utilities/logger')
 const { customerSchema } = require('../models/Customer')
 const { orderSchema } = require('../models/Order')
 const db = require('../config/db')
 import type { Customer } from '../models/Customer'
 import type { Order } from '../models/Order'
 import { Product, Status } from '../typing/enums'
-
-const { log } = logger
 
 // https://graphql.org/graphql-js/constructing-types/
 
@@ -153,7 +151,7 @@ const mutation = new GraphQLObjectType({
               log.error(`${err.path[index]} ${err.message}`, { index })
             })
           } else {
-            log.error(`unexpected customer parse error: ${err}`)
+            logErr({ header: 'customer parse error', err })
           }
         }
       },
@@ -214,8 +212,6 @@ const mutation = new GraphQLObjectType({
             customerId: args.customerId,
           })
 
-          console.log('order', order)
-
           return db.orders.save({ doc: order })
         } catch (err: typeof z.ZodError | unknown) {
           if (err instanceof z.ZodError) {
@@ -223,7 +219,7 @@ const mutation = new GraphQLObjectType({
               log.error(`${err.path[index]} ${err.message}`, { index })
             })
           } else {
-            log.error(`unexpected order parse error: ${err}`)
+            logErr({ header: 'order parse error', err })
           }
         }
       },
