@@ -40,9 +40,7 @@ const orderType = new GraphQLObjectType({
     customer: {
       type: customerType,
       resolve(parent: Order, args: Customer) {
-        return db.customers.findById({
-          id: parent.customerId,
-        })
+        return db.customers.findById(parent.customerId)
       },
     },
   }),
@@ -101,7 +99,7 @@ const queryType = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
       resolve: (parent: unknown, { id }: Order) => {
-        return db.orders.findById({ id })
+        return db.orders.findById(id)
       },
     },
     customers: {
@@ -119,7 +117,7 @@ const queryType = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
       resolve: (parent: unknown, { id }: Customer) => {
-        return db.customers.findById({ id })
+        return db.customers.findById(id)
       },
     },
   },
@@ -144,7 +142,7 @@ const mutation = new GraphQLObjectType({
             phone: args.phone,
           })
 
-          return db.customers.save({ doc: customer })
+          return db.customers.save(customer)
         } catch (err: typeof z.ZodError | unknown) {
           if(err instanceof z.ZodError) {
             err.issues.forEach((err: typeof z.ZodError, index: number) => {
@@ -168,13 +166,13 @@ const mutation = new GraphQLObjectType({
         })
 
         orders.forEach(({ id }: Customer) => {
-          db.orders.findByIdAndRemove({ id })
+          db.orders.findByIdAndRemove(id)
         })
 
-        return db.customers.findByIdAndRemove({ id: args.id })
+        return db.customers.findByIdAndRemove(args.id)
       },
     },
-    // Add a order
+    // Add an order
     addOrder: {
       type: orderType,
       args: {
@@ -212,7 +210,7 @@ const mutation = new GraphQLObjectType({
             customerId: args.customerId,
           })
 
-          return db.orders.save({ doc: order })
+          return db.orders.save(order)
         } catch (err: typeof z.ZodError | unknown) {
           if (err instanceof z.ZodError) {
             err.issues.forEach((err: typeof z.ZodError, index: number) => {
@@ -242,8 +240,8 @@ const mutation = new GraphQLObjectType({
           }),
         },
       },
-      resolve(parent: unknown, { id, ...patch }: Order) {
-        return db.orders.findByIdAndUpdate({ id, patch })
+      resolve(parent: unknown, { id, ...update }: Order) {
+        return db.orders.findByIdAndUpdate(id, { update })
       },
     },
     // Delete an order
@@ -253,7 +251,7 @@ const mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
       resolve(parent: unknown, { id }: Order) {
-        return db.orders.findByIdAndRemove({ id })
+        return db.orders.findByIdAndRemove(id)
       },
     },
   },
