@@ -1,9 +1,12 @@
 const path = require('path')
-const logger = require('../utilities/logger')
+const z = require('zod')
+const { log, logErr } = require('../utilities/logger')
+const { customerSchema } = require('../models/Customer')
+const { orderSchema } = require('../models/Order')
 import type { Customer } from '../models/Customer'
 import type { Order } from '../models/Order'
 import { DataSet } from '../typing/enums'
-import type { Id, Err, Doc } from '../typing/types'
+import type { Id, Err } from '../typing/types'
 import type * as I from '../typing/interfaces'
 
 require('dotenv-flow').config()
@@ -19,7 +22,7 @@ const crud = {
       throw new Error(`fetch failed with status ${response.status}`)
     },
     handle({ err }: { err: Err }) {
-      logger.logErr({ header: 'fetch error', err })
+      logErr({ header: 'fetch error', err })
     },
   },
   async create({ dataSet, doc }: I.Create) {
@@ -134,13 +137,33 @@ const crud = {
 
 export = {
   [crud.datasets.customers]: {
-    async save(doc: Doc) {
-      const result = await crud.create({
-        dataSet: crud.datasets.customers,
-        doc,
-      })
+    async save(doc: Customer) {
+      let customer: Customer | undefined
 
-      return result
+      try {
+        customer = customerSchema.parse({
+          name: doc.name,
+          email: doc.email,
+          phone: doc.phone,
+        })
+      } catch (err: typeof z.ZodError | unknown) {
+        if(err instanceof z.ZodError) {
+          err.issues.forEach((err: typeof z.ZodError, index: number) => {
+            log.error(`${err.path[index]} ${err.message}`, { index })
+          })
+        } else {
+          logErr({ header: 'customer parse error', err })
+        }
+      }
+
+      if (customer) {
+        const result = await crud.create({
+          dataSet: crud.datasets.customers,
+          doc: customer,
+        })
+
+        return result
+      }
     },
     async find({ filter }: I.FilterOptions) {
       const result = await crud.read({
@@ -177,13 +200,34 @@ export = {
     },
   },
   [crud.datasets.orders]: {
-    async save(doc: Doc) {
-      const result = await crud.create({
-        dataSet: crud.datasets.orders,
-        doc,
-      })
+    async save(doc: Order) {
+      let order: Order | undefined
 
-      return result
+      try {
+        order = orderSchema.parse({
+          name: doc.name,
+          ...(doc.notes && { notes: doc.notes }),
+          status: doc.status,
+          customerId: doc.customerId,
+        })
+      } catch (err: typeof z.ZodError | unknown) {
+        if (err instanceof z.ZodError) {
+          err.issues.forEach((err: typeof z.ZodError, index: number) => {
+            log.error(`${err.path[index]} ${err.message}`, { index })
+          })
+        } else {
+          logErr({ header: 'order parse error', err })
+        }
+      }
+
+      if (order) {
+        const result = await crud.create({
+          dataSet: crud.datasets.orders,
+          doc: order,
+        })
+
+        return result
+      }
     },
     async find({ filter }: I.FilterOptions) {
       const result = await crud.read({

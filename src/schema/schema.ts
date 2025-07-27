@@ -8,10 +8,6 @@ const {
   GraphQLNonNull,
   GraphQLEnumType,
 } = require('graphql')
-const z = require('zod')
-const { log, logErr } = require('../utilities/logger')
-const { customerSchema } = require('../models/Customer')
-const { orderSchema } = require('../models/Order')
 const db = require('../config/db')
 import type { Customer } from '../models/Customer'
 import type { Order } from '../models/Order'
@@ -135,23 +131,7 @@ const mutation = new GraphQLObjectType({
         phone: { type: new GraphQLNonNull(GraphQLString) },
       },
       resolve(parent: unknown, args: Customer) {
-        try {
-          const customer: Customer = customerSchema.parse({
-            name: args.name,
-            email: args.email,
-            phone: args.phone,
-          })
-
-          return db.customers.save(customer)
-        } catch (err: typeof z.ZodError | unknown) {
-          if(err instanceof z.ZodError) {
-            err.issues.forEach((err: typeof z.ZodError, index: number) => {
-              log.error(`${err.path[index]} ${err.message}`, { index })
-            })
-          } else {
-            logErr({ header: 'customer parse error', err })
-          }
-        }
+        return db.customers.save(args)
       },
     },
     // Delete a customer
@@ -202,24 +182,7 @@ const mutation = new GraphQLObjectType({
         customerId: { type: new GraphQLNonNull(GraphQLID) },
       },
       resolve(parent: unknown, args: Order) {
-        try {
-          const order: Order = orderSchema.parse({
-            name: args.name,
-            ...(args.notes && { notes: args.notes }),
-            status: args.status,
-            customerId: args.customerId,
-          })
-
-          return db.orders.save(order)
-        } catch (err: typeof z.ZodError | unknown) {
-          if (err instanceof z.ZodError) {
-            err.issues.forEach((err: typeof z.ZodError, index: number) => {
-              log.error(`${err.path[index]} ${err.message}`, { index })
-            })
-          } else {
-            logErr({ header: 'order parse error', err })
-          }
-        }
+        return db.orders.save(args)
       },
     },
     // Update an order
