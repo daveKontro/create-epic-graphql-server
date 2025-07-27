@@ -16,7 +16,7 @@ interface IdOptions {
 }
 
 interface DocOptions {
-  doc: types.Doc,
+  doc: Customer | Order,
 }
 
 export interface FilterOptions {
