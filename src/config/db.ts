@@ -3,11 +3,10 @@ const logger = require('../utilities/logger')
 import type { Customer } from '../models/Customer'
 import type { Order } from '../models/Order'
 import { DataSet } from '../typing/enums'
+import type { Id, Err, Doc } from '../typing/types'
 import type * as I from '../typing/interfaces'
 
 require('dotenv-flow').config()
-
-const { log } = logger
 
 const crud = {
   url: `http://localhost:${process.env.JSON_SERVER_PORT || 3210}`,
@@ -19,12 +18,8 @@ const crud = {
     throw({ response }: { response: Response }) {
       throw new Error(`fetch failed with status ${response.status}`)
     },
-    handle({ err }:{ err: unknown }) {
-      if (err instanceof Error) {
-        log.error(`fetch error: ${err.message}`)
-      } else {
-        log.error(`unexpected fetch error: ${err}`)
-      }
+    handle({ err }: { err: Err }) {
+      logger.logErr({ header: 'fetch error', err })
     },
   },
   async create({ dataSet, doc }: I.Create) {
@@ -92,12 +87,12 @@ const crud = {
       this.errors.handle({ err })
     }
   },
-  async update({ dataSet, id, patch }: I.Update) {
+  async update({ dataSet, id, update }: I.Update) {
     const resource = path.join(this.url, dataSet, id)
     const options = {
       method: 'PATCH',
       headers: this.headers,
-      body: JSON.stringify(patch),
+      body: JSON.stringify(update),
     }
 
     let result
@@ -139,7 +134,7 @@ const crud = {
 
 export = {
   [crud.datasets.customers]: {
-    async save({ doc }: I.Doc) {
+    async save(doc: Doc) {
       const result = await crud.create({
         dataSet: crud.datasets.customers,
         doc,
@@ -147,7 +142,7 @@ export = {
 
       return result
     },
-    async find({ filter }: I.Filter) {
+    async find({ filter }: I.FilterOptions) {
       const result = await crud.read({
         dataSet: crud.datasets.customers,
         filter,
@@ -155,7 +150,7 @@ export = {
 
       return result
     },
-    async findById({ id }: I.Id) {
+    async findById(id: Id) {
       const result = await crud.readOne({
         dataSet: crud.datasets.customers,
         id,
@@ -163,16 +158,16 @@ export = {
 
       return result
     },
-    async findByIdAndUpdate({ id, patch }: I.Update) {
+    async findByIdAndUpdate(id: Id, { update }: I.UpdateOptions) {
       const result = await crud.update({
         dataSet: crud.datasets.customers,
         id,
-        patch,
+        update,
       })
 
       return result
     },
-    async findByIdAndRemove({ id }: I.Id) {
+    async findByIdAndRemove(id: Id) {
       const result = await crud.delete({
         dataSet: crud.datasets.customers,
         id,
@@ -182,7 +177,7 @@ export = {
     },
   },
   [crud.datasets.orders]: {
-    async save({ doc }: I.Doc) {
+    async save(doc: Doc) {
       const result = await crud.create({
         dataSet: crud.datasets.orders,
         doc,
@@ -190,7 +185,7 @@ export = {
 
       return result
     },
-    async find({ filter }: I.Filter) {
+    async find({ filter }: I.FilterOptions) {
       const result = await crud.read({
         dataSet: crud.datasets.orders,
         filter,
@@ -198,7 +193,8 @@ export = {
 
       return result
     },
-    async findById({ id }: I.Id) {
+    async findById(id: Id) {
+      console.log(id)
       const result = await crud.readOne({
         dataSet: crud.datasets.orders,
         id,
@@ -206,16 +202,16 @@ export = {
 
       return result
     },
-    async findByIdAndUpdate({ id, patch }: I.Update) {
+    async findByIdAndUpdate(id: Id, { update }: I.UpdateOptions) {
       const result = await crud.update({
         dataSet: crud.datasets.orders,
         id,
-        patch,
+        update,
       })
 
       return result
     },
-    async findByIdAndRemove({ id }: I.Id) {
+    async findByIdAndRemove(id: Id) {
       const result = await crud.delete({
         dataSet: crud.datasets.orders,
         id,

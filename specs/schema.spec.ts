@@ -94,7 +94,7 @@ describe('GraphQL Schema', () => {
     })
 
     expect(saveStub.calledOnce).to.be.true
-    expect(saveStub.firstCall.args[0].doc).to.include({
+    expect(saveStub.firstCall.args[0]).to.include({
       name: 'Alice',
       email: 'alice@example.com',
       phone: '123-456',
