@@ -1,11 +1,12 @@
 const express = require('express')
+const graphqlRouter = express.Router()
 const cors = require('cors')
 const helmet = require('helmet')
 const chalk = require('chalk')
 const { createHandler } = require('graphql-http/lib/use/express')
 const { ruruHTML } = require('ruru/server')
+const routes = require('./routes')
 const { schema } = require('./schema/schema')
-const { check } = require('./config/check')
 const logger = require('./utilities/logger')
 import type { Application, Request, Response } from 'express'
 import { NodeEnv } from './typing/enums'
@@ -31,18 +32,17 @@ if (NODE_ENV === production) {
   )
 }
 
-app.all(
-  '/graphql',
+app.use(routes)
+
+graphqlRouter.all('/',
   createHandler({
     schema,
   })
 )
 
-if (NODE_ENV === development) {
-  app.get(check, (req: Request, res: Response) => {
-    res.status(200).send('okay...')
-  })
+app.use('/graphql', graphqlRouter)
 
+if (NODE_ENV === development) {
   // ruru GraphiQL runs on the endpoint '/' not '/graphql'
   app.get('/', (req: Request, res: Response) => {
     res.type('html')
