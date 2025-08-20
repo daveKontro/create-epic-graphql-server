@@ -9,7 +9,7 @@ Having a preconfigured server will jump-start your project so you never have to 
 
 Use GraphQL to unify you data into a single API. Take advantage of the powerful, intuitive GraphQL query language.  
 
-Interact with this project template live [here](https://www.creategraphqlserver.com/).  
+Interact with this project template live [here](https://www.createepicgraphqlserver.com/).  
 
 ## installation
 first install globally  
