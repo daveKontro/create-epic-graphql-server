@@ -101,7 +101,7 @@ PORT={port number}
 ```
 
 ## query samples
-Run these queries against the development server to get a feel the GraphQL query language. 
+run these queries against the development server to get a feel the GraphQL query language  
 
 ### get all orders
 ```
