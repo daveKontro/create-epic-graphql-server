@@ -7,7 +7,7 @@ This module provides a configured [GraphQL](https://www.npmjs.com/package/graphq
 
 Having a preconfigured server will jump-start your project so you never have to begin from scratch.  
 
-Use GraphQL to unify you data into a single API. Take advantage of the powerful, intuitive GraphQL query language.  
+Use GraphQL to unify your data into a single API. Take advantage of the powerful, intuitive GraphQL query language.  
 
 Interact with this project template live [here](https://www.createepicgraphqlserver.com/).  
 
