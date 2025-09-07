@@ -1,6 +1,6 @@
 {
   "name": "create-epic-graphql-server",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "description": "a configured graphql server",
   "main": "index.js",
   "bin": {
@@ -74,7 +74,8 @@
     "@typescript-eslint/parser": "6.5.0",
     "chai": "4.3.10",
     "eslint": "8.57.1",
-    "mocha": "9.2.2",
+    "mocha": "11.7.2",
+    "npm": "11.6.0",
     "sinon": "21.0.0",
     "supertest": "7.1.1",
     "ts-node": "10.9.2",
