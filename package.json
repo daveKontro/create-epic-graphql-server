@@ -1,6 +1,6 @@
 {
   "name": "create-epic-graphql-server",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "a configured graphql server",
   "main": "index.js",
   "bin": {
@@ -55,7 +55,7 @@
     "helmet": "8.1.0",
     "husky": "9.1.7",
     "json-server": "1.0.0-beta.3",
-    "ruru": "2.0.0-beta.22",
+    "ruru": "2.0.0-beta.30",
     "winston": "3.17.0",
     "winston-daily-rotate-file": "5.0.0",
     "yargs": "17.7.2",
@@ -75,7 +75,6 @@
     "chai": "4.3.10",
     "eslint": "8.57.1",
     "mocha": "11.7.2",
-    "npm": "11.6.0",
     "sinon": "21.0.0",
     "supertest": "7.1.1",
     "ts-node": "10.9.2",
