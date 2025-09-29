@@ -42,3 +42,8 @@ export interface LogErr extends ErrorHandler {
   meta?: object,
   level?: enums.LogLevel.warn | enums.LogLevel.error,
 }
+
+export interface User {
+  id: string,
+  roles: string[],
+}

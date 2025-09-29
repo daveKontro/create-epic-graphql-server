@@ -7,8 +7,10 @@ const {
   GraphQLList,
   GraphQLNonNull,
   GraphQLEnumType,
+  // GraphQLResolveInfo,
+  // SelectionSetNode,
 } = require('graphql')
-const db = require('../config/db')
+import type { Context } from '../index'
 import type { Customer } from '../models/Customer'
 import type { Order } from '../models/Order'
 import { Product, Status } from '../typing/enums'
@@ -35,7 +37,7 @@ const orderType = new GraphQLObjectType({
     // NOTE creates relationship with other type
     customer: {
       type: customerType,
-      resolve(parent: Order, args: Customer) {
+      resolve(parent: Order, args: Customer, { db }: Context) {
         return db.customers.findById(parent.customerId)
       },
     },
@@ -68,7 +70,7 @@ const queryType = new GraphQLObjectType({
       args: {
         filter: { type: orderFilterInput },
       },
-      resolve(parent: unknown, { filter }: { filter: Order }) {
+      resolve(parent: unknown, { filter }: { filter: Order }, { db }: Context) {
         return db.orders.find({ filter })
       },
       // NOTE:
@@ -79,13 +81,31 @@ const queryType = new GraphQLObjectType({
       // the example resolver implementation shown below 
       // may avoid over fetching from a database or API
       //
-      // resolve(parent, { filter }, context, info) {
-      //   const fields = info
+      // resolve(
+      //   parent: unknown,
+      //   { filter }: { filter: Order },
+      //   { db }: Context,
+      //   info: typeof GraphQLResolveInfo
+      // ) {
+      //
+      //   const selections = info
       //     .fieldNodes[0]
       //     .selectionSet
-      //     .selections
-      //     .map(s => s.name.value)
+      //     ?.selections || []
       //
+      //   const fields = selections.reduce((
+      //     acc: Record<string, number>,
+      //     selection: typeof SelectionSetNode
+      //   ) => {
+      //     if (selection.kind === 'Field') {
+      //       acc[selection.name.value] = 1
+      //     }
+      //
+      //     return acc
+      //   }, {})
+      //
+      //   // filter = query criteria (docs, rows, etc.)
+      //   // fields = projection (fields, columns, etc.)
       //   return db.orders.find(filter, fields)
       // },
     },
@@ -94,7 +114,7 @@ const queryType = new GraphQLObjectType({
       args: {
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
-      resolve: (parent: unknown, { id }: Order) => {
+      resolve: (parent: unknown, { id }: Order, { db }: Context) => {
         return db.orders.findById(id)
       },
     },
@@ -103,7 +123,7 @@ const queryType = new GraphQLObjectType({
       args: {
         filter: { type: customerFilterInput },
       },
-      resolve(parent: unknown, { filter }: { filter: Customer }) {
+      resolve(parent: unknown, { filter }: { filter: Customer }, { db }: Context) {
         return db.customers.find({ filter })
       },
     },
@@ -112,7 +132,7 @@ const queryType = new GraphQLObjectType({
       args: {
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
-      resolve: (parent: unknown, { id }: Customer) => {
+      resolve: (parent: unknown, { id }: Customer, { db }: Context) => {
         return db.customers.findById(id)
       },
     },
@@ -130,7 +150,7 @@ const mutation = new GraphQLObjectType({
         email: { type: new GraphQLNonNull(GraphQLString) },
         phone: { type: new GraphQLNonNull(GraphQLString) },
       },
-      resolve(parent: unknown, args: Customer) {
+      resolve(parent: unknown, args: Customer, { db }: Context) {
         return db.customers.save(args)
       },
     },
@@ -140,7 +160,7 @@ const mutation = new GraphQLObjectType({
       args: {
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
-      async resolve(parent: unknown, args: Customer) {
+      async resolve(parent: unknown, args: Customer, { db }: Context) {
         const orders = await db.orders.find({
           filter: { customerId: args.id },
         })
@@ -181,7 +201,7 @@ const mutation = new GraphQLObjectType({
         },
         customerId: { type: new GraphQLNonNull(GraphQLID) },
       },
-      resolve(parent: unknown, args: Order) {
+      resolve(parent: unknown, args: Order, { db }: Context) {
         return db.orders.save(args)
       },
     },
@@ -203,7 +223,7 @@ const mutation = new GraphQLObjectType({
           }),
         },
       },
-      resolve(parent: unknown, { id, ...update }: Order) {
+      resolve(parent: unknown, { id, ...update }: Order, { db }: Context) {
         return db.orders.findByIdAndUpdate(id, { update })
       },
     },
@@ -213,7 +233,7 @@ const mutation = new GraphQLObjectType({
       args: {
         id: { type: new GraphQLNonNull(GraphQLID) },
       },
-      resolve(parent: unknown, { id }: Order) {
+      resolve(parent: unknown, { id }: Order, { db }: Context) {
         return db.orders.findByIdAndRemove(id)
       },
     },

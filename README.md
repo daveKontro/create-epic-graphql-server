@@ -89,6 +89,7 @@ also add any additional variables your project needs
 # optional but recommended
 NODE_ENV=development
 PORT={port number}
+SESSION_SECRET=mySecret!
 # optional
 JSON_SERVER_PORT={dev db port, default 3210}
 ```
