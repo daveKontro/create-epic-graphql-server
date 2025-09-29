@@ -4,26 +4,23 @@ const sinon = require('sinon')
 const express = require('express')
 const { createHandler } = require('graphql-http/lib/use/express')
 const { schema } = require('../src/schema/schema')
-const db = require('../src/config/db')
-import type { SinonStub } from 'sinon' 
-
-const app = express()
-app.use('/graphql', createHandler({ schema }))
+import type { SinonStub } from 'sinon'
 
 describe('GraphQL Schema', () => {
   let saveStub: SinonStub
   let findStub: SinonStub
+  let app
 
   beforeEach(() => {
-    // Stub db methods
-    saveStub = sinon.stub(db.customers, 'save').resolves({
+    // create fresh stubs for each test
+    saveStub = sinon.stub().resolves({
       id: '1',
       name: 'Alice',
       email: 'alice@example.com',
       phone: '123-456',
     })
 
-    findStub = sinon.stub(db.customers, 'find').resolves([
+    findStub = sinon.stub().resolves([
       {
         id: '1',
         name: 'Alice',
@@ -31,6 +28,23 @@ describe('GraphQL Schema', () => {
         phone: '123-456',
       },
     ])
+
+    // build express app, inject stubbed db into context
+    app = express()
+    app.use(
+      '/graphql',
+      createHandler({
+        schema,
+        context: () => ({
+          db: {
+            customers: {
+              save: saveStub,
+              find: findStub,
+            },
+          },
+        }),
+      })
+    )
   })
 
   afterEach(() => {
@@ -64,6 +78,8 @@ describe('GraphQL Schema', () => {
       email: 'alice@example.com',
       phone: '123-456',
     })
+
+    expect(findStub.calledOnce).to.be.true
   })
 
   it('adds a customer', async () => {

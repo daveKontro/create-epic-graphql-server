@@ -23,7 +23,8 @@
       "@types/mocha",
       "@types/node",
       "@types/sinon",
-      "@types/supertest"
+      "@types/supertest",
+      "@types/express-session"
     ],
   },
   "include": [
