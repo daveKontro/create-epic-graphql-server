@@ -1,6 +1,7 @@
 .eslintrc.js
 node_modules
 .vscode
+.husky
 specs
 bin
 build
