@@ -3,6 +3,7 @@ notes.md
 db.json5
 build
 .vscode
+audit-report.json
 
 # Logs
 logs

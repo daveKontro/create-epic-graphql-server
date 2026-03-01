@@ -194,5 +194,9 @@ module.exports = {
         'ignoreComments': true,
       },
     ],
+    'comma-spacing': ['error', {
+      before: false,
+      after: true,
+    }],
   },
 }

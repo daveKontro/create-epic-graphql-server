@@ -227,3 +227,16 @@ run these queries against the development server to get a feel the GraphQL query
     }
   }
 ```
+
+## dependency overrides
+
+this version includes minimal npm `overrides` to patch known transitive vulnerabilities in webpack tooling
+
+they are intentionally limited to patch-level upgrades within the same major
+
+you can remove them in the future by:
+
+  1. running `npm update`
+  2. removing the `overrides` section
+  3. reinstalling dependencies
+  4. running `npm audit`
