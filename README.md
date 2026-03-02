@@ -11,15 +11,17 @@ Use GraphQL to unify your data into a single API. Take advantage of the powerful
 
 Interact with this project template live [here](https://www.createepicgraphqlserver.com/).  
 
+NOTE this is a continuation of the project [create-epic-graphql-server](https://www.npmjs.com/package/create-epic-graphql-server)  
+
 ## installation
 first install globally  
 ```
-npm install -g create-epic-graphql-server
+npm install -g @epic-effx/create-epic-graphql-server
 ```
 
 then create your project  
 ```
-npx create-epic-graphql-server --name={my-project}
+npx @epic-effx/create-epic-graphql-server --name={my-project}
 ```
 
 ## usage
