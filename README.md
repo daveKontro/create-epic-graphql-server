@@ -50,7 +50,7 @@ the schema sits at the heart of the GraphQL service
 
 the types describe what data you can query, and the schema is the collection of what the service provides  
 
-a sample schema has been configured in `/src/schema/schema` with model validation, read all, read on, mutations, etc... again, your usecase will necessitate alterations to the schema, but the provided pattern might help you along the way  
+a sample schema has been configured in `/src/schema/schema` with model validation, read all, read on, mutations, etc... again, your use case will necessitate alterations to the schema, but the provided pattern might help you along the way  
 
 ## test suite
 the test suite is enabled to run unit and integration tests  
@@ -65,19 +65,19 @@ npm run test:watch
 ```
 
 ## linting
-linting rules are in `.eslintrc.js`; install the [ESLint](https://www.npmjs.com/package/eslint) pluggin if using vscode  
+linting rules are in `.eslintrc.js`; install the [ESLint](https://www.npmjs.com/package/eslint) plugin if using vscode  
 
 ```
 npm run lint
 ```
 
 ## custom logger
-A customized [winston](https://www.npmjs.com/package/winston) logger instance resides in `utilities/logger`, with usage found thoughout the codebase methods are provide to log a timestamp or the current node environment  
+A customized [winston](https://www.npmjs.com/package/winston) logger instance resides in `utilities/logger`, with usage found throughout the codebase methods are provide to log a timestamp or the current node environment  
 
 ## pre-commit
 scripts in `.husky/pre-commit` are run on commits for quality control  
 
-add or remove scripts you'd like run before code is commited  
+add or remove scripts you'd like run before code is committed  
 
 ## environmental settings
 you can create a `.env` file at the project root and add the following variables  
