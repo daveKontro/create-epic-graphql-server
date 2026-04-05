@@ -26,6 +26,7 @@
     "express",
     "typescript",
     "eslint",
+    "husky",
     "mocha",
     "chai",
     "sinon",

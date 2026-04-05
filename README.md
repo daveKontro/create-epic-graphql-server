@@ -74,12 +74,14 @@ npm run lint
 ```
 
 ## custom logger
-A customized [winston](https://www.npmjs.com/package/winston) logger instance resides in `utilities/logger`, with usage found throughout the codebase methods are provide to log a timestamp or the current node environment  
+a customized [winston](https://www.npmjs.com/package/winston) logger instance resides in `utilities/logger`, with usage found throughout the codebase methods are provide to log a timestamp or the current node environment  
 
-## pre-commit
+## git hooks
 scripts in `.husky/pre-commit` are run on commits for quality control  
 
-add or remove scripts you'd like run before code is committed  
+run `npm prepare` to enable husky and use the provided pre-commit file  
+
+warning: running `npx husky init` will re-initiate husky and overwrite the provided pre-commit file  
 
 ## environmental settings
 you can create a `.env` file at the project root and add the following variables  
