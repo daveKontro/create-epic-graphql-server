@@ -5,9 +5,9 @@ require('winston-daily-rotate-file')
 const packageJson = require('../../package.json')
 import type { Logger } from 'winston'
 import type { Format } from 'logform'
-import { NodeEnv, LogLevel, LogFile } from '../typing/enums'
-import type { Msg } from '../typing/types'
-import type { ErrorHandler, LogErr } from '../typing/interfaces'
+import { NodeEnv, LogLevel, LogFile } from '../types'
+import type { Msg } from '../types'
+import type { ErrorHandler, LogErr } from '../types'
 
 require('dotenv-flow').config()
 

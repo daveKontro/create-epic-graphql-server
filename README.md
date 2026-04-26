@@ -54,6 +54,26 @@ the types describe what data you can query, and the schema is the collection of 
 
 a sample schema has been configured in `/src/schema/schema` with model validation, read all, read on, mutations, etc... again, your use case will necessitate alterations to the schema, but the provided pattern might help you along the way  
 
+## SDL and code generation 🚀
+this project uses a [Schema Definition Language](https://graphql.org/learn/schema/) (SDL) file at `/src/schema/schema.graphql` as the single source of truth for the GraphQL API contract
+
+[graphql-codegen](https://the-guild.dev/graphql/codegen) reads the SDL at build time and generates TypeScript types into `/src/types/generated.ts`, including:
+
+- **base types** - TypeScript representations of every SDL type, input, and enum
+- **resolver types** - a `Resolvers` interface that enforces the correct signature (parent, args, context, return type) for every resolver function in `/src/schema/resolvers.ts`
+
+this closes the gap between the GraphQL schema and TypeScript code - if a resolver's return type or argument shape drifts from the SDL, TypeScript will catch it at compile time rather than at runtime
+
+when combined with a typed GraphQL client such as [Apollo Client](https://www.apollographql.com/docs/react) and codegen's `typescript-operations` plugin, this type safety extends all the way to the frontend - query results and mutation variables are typed to exactly the fields selected in each operation
+
+run codegen manually or let it watch for schema changes during development
+```
+npm run codegen
+npm run codegen:watch
+```
+
+note: the `build` script runs codegen automatically before compiling
+
 ## test suite
 the test suite is enabled to run unit and integration tests  
 

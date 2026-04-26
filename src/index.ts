@@ -13,8 +13,8 @@ const { schema } = require('./schema/schema')
 const logger = require('./utilities/logger')
 const { getUserFromReq } = require('./utilities/getUserFromReq')
 import type { Application, Request, Response } from 'express'
-import { NodeEnv } from './typing/enums'
-import type { User } from './typing/interfaces'
+import { NodeEnv } from './types'
+import type { User } from './types'
 
 require('dotenv-flow').config()
 

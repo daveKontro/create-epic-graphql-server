@@ -6,3 +6,5 @@ specs
 bin
 build
 tsconfig.json
+src/types/generated.ts
+src/types/generated-resolvers.ts

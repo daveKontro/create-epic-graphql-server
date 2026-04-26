@@ -3,11 +3,20 @@ const z = require('zod')
 const { log, logErr } = require('../utilities/logger')
 const { customerSchema } = require('../models/Customer')
 const { orderSchema } = require('../models/Order')
-import type { Customer } from '../models/Customer'
-import type { Order } from '../models/Order'
-import { DataSet } from '../typing/enums'
-import type { Id, Err } from '../typing/types'
-import type * as I from '../typing/interfaces'
+import { DataSet } from '../types'
+import type {
+  Customer,
+  Order,
+  Id,
+  Err,
+  Create,
+  Read,
+  ReadOne,
+  Update,
+  Delete,
+  FilterOptions,
+  UpdateOptions,
+} from '../types'
 
 require('dotenv-flow').config()
 
@@ -25,7 +34,7 @@ const crud = {
       logErr({ header: 'fetch error', err })
     },
   },
-  async create({ dataSet, doc }: I.Create) {
+  async create({ dataSet, doc }: Create) {
     const resource = path.join(this.url, dataSet)
     const options = {
       method: 'POST',
@@ -47,7 +56,7 @@ const crud = {
 
     return result
   },
-  async read({ dataSet, filter }: I.Read) {
+  async read({ dataSet, filter }: Read) {
     let resource = path.join(this.url, dataSet)
 
     // add "filter" as query params
@@ -73,7 +82,7 @@ const crud = {
       this.errors.handle({ err })
     }
   },
-  async readOne({ dataSet, id }: I.ReadOne) {
+  async readOne({ dataSet, id }: ReadOne) {
     const resource = path.join(this.url, dataSet, id)
 
     let result: Customer | Order
@@ -90,7 +99,7 @@ const crud = {
       this.errors.handle({ err })
     }
   },
-  async update({ dataSet, id, update }: I.Update) {
+  async update({ dataSet, id, update }: Update) {
     const resource = path.join(this.url, dataSet, id)
     const options = {
       method: 'PATCH',
@@ -112,7 +121,7 @@ const crud = {
 
     return result
   },
-  async delete({ dataSet, id }: I.Delete) {
+  async delete({ dataSet, id }: Delete) {
     const resource = path.join(this.url, dataSet, id)
     const options = {
       method: 'DELETE',
@@ -165,7 +174,7 @@ export = {
         return result
       }
     },
-    async find({ filter }: I.FilterOptions) {
+    async find({ filter }: FilterOptions) {
       const result = await crud.read({
         dataSet: crud.datasets.customers,
         filter,
@@ -181,7 +190,7 @@ export = {
 
       return result
     },
-    async findByIdAndUpdate(id: Id, { update }: I.UpdateOptions) {
+    async findByIdAndUpdate(id: Id, { update }: UpdateOptions) {
       const result = await crud.update({
         dataSet: crud.datasets.customers,
         id,
@@ -229,7 +238,7 @@ export = {
         return result
       }
     },
-    async find({ filter }: I.FilterOptions) {
+    async find({ filter }: FilterOptions) {
       const result = await crud.read({
         dataSet: crud.datasets.orders,
         filter,
@@ -246,7 +255,7 @@ export = {
 
       return result
     },
-    async findByIdAndUpdate(id: Id, { update }: I.UpdateOptions) {
+    async findByIdAndUpdate(id: Id, { update }: UpdateOptions) {
       const result = await crud.update({
         dataSet: crud.datasets.orders,
         id,

@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 import type { Request, Response } from 'express'
-import { NodeEnv } from '../typing/enums'
+import { NodeEnv } from '../types'
 
 require('dotenv-flow').config()
 
