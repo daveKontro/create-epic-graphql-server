@@ -19,13 +19,13 @@ export enum LogFile {
   error = 'error',
 }
 
-export enum Product {
+export enum OrderName {
   productOne = 'Product One',
   productTwo = 'Product Two',
   productThree = 'Product Three',
 }
 
-export enum Status {
+export enum OrderStatus {
   notStarted = 'Not Started',
   processing = 'Processing',
   sent = 'Sent',

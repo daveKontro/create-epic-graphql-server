@@ -1,12 +1,15 @@
 const { expect } = require('chai')
 import { orderSchema } from '../src/models/Order'
-import { Product, Status } from '../src/typing/enums'
+import {
+  OrderName,
+  OrderStatus,
+} from '../src/types/enums'
 
 describe('orderSchema', () => {
   it('validates a correct order object', () => {
     const input = {
-      name: Product.productOne,
-      status: Status.processing,
+      name: OrderName.productOne,
+      status: OrderStatus.processing,
       customerId: 'abc123',
       notes: 'Fragile item',
     }
@@ -20,7 +23,7 @@ describe('orderSchema', () => {
 
   it('fails if required fields are missing', () => {
     const input = {
-      name: Product.productTwo,
+      name: OrderName.productTwo,
     }
 
     const result = orderSchema.safeParse(input)
@@ -50,8 +53,8 @@ describe('orderSchema', () => {
 
   it('accepts when optional fields are omitted', () => {
     const input = {
-      name: Product.productThree,
-      status: Status.sent,
+      name: OrderName.productThree,
+      status: OrderStatus.sent,
       customerId: 'xyz789',
     }
 
@@ -66,8 +69,8 @@ describe('orderSchema', () => {
   it('accepts if id is provided but optional', () => {
     const input = {
       id: 'order-001',
-      name: Product.productTwo,
-      status: Status.notStarted,
+      name: OrderName.productTwo,
+      status: OrderStatus.notStarted,
       customerId: 'cust001',
     }
 

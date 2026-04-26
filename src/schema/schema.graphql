@@ -1,0 +1,59 @@
+enum OrderName {
+  productOne
+  productTwo
+  productThree
+}
+
+enum OrderStatus {
+  notStarted
+  processing
+  sent
+}
+
+enum OrderStatusUpdate {
+  notStarted
+  processing
+  sent
+}
+
+input OrderFilterInput {
+  name: String
+  status: String
+  customerId: ID
+}
+
+input CustomerFilterInput {
+  name: String
+  email: String
+  phone: String
+}
+
+type Customer {
+  id: ID
+  name: String
+  email: String
+  phone: String
+}
+
+type Order {
+  id: ID
+  name: String
+  notes: String
+  status: String
+  customer: Customer
+}
+
+type Query {
+  orders(filter: OrderFilterInput): [Order]
+  order(id: ID!): Order
+  customers(filter: CustomerFilterInput): [Customer]
+  customer(id: ID!): Customer
+}
+
+type Mutation {
+  addCustomer(name: String!, email: String!, phone: String!): Customer
+  deleteCustomer(id: ID!): Customer
+  addOrder(name: OrderName!, notes: String, status: OrderStatus!, customerId: ID!): Order
+  updateOrder(id: ID!, name: String, notes: String, status: OrderStatusUpdate): Order
+  deleteOrder(id: ID!): Order
+}

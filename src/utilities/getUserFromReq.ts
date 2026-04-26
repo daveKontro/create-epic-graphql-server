@@ -1,5 +1,5 @@
 import type { Request } from 'express'
-import type { User } from 'typing/interfaces'
+import type { User } from 'types'
 
 // NOTE this is a DUMMY pattern to demo how 
 // one might pass request info into GraphQL 

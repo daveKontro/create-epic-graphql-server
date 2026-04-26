@@ -7,9 +7,11 @@
     "create-epic-graphql-server": "bin/create-epic-graphql-server.js"
   },
   "scripts": {
-    "build": "tsc --build",
+    "codegen": "graphql-codegen --config codegen.ts",
+    "codegen:watch": "graphql-codegen --config codegen.ts --watch",
+    "build": "npm run codegen && tsc --build",
     "start": "node ./build/index.js",
-    "dev": "concurrently \"tsx watch ./src/index.ts\" \"npm run test:watch:min\"",
+    "dev": "npm run codegen && concurrently \"npm run codegen:watch\" \"tsx watch ./src/index.ts\" \"npm run test:watch:min\"",
     "dev:db": "dotenv -e .env -- bash -c 'cp db-seed.json5 db.json5 && json-server db.json5 --port ${JSON_SERVER_PORT:-3210}'",
     "test": "mocha --require ts-node/register specs/**/*.ts",
     "test:watch": "mocha --require ts-node/register specs/**/*.ts --watch --watch-files src/**/*.ts,specs/**/*.ts",
@@ -71,6 +73,10 @@
     "zod": "3.24.4"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "6.3.1",
+    "@graphql-codegen/typescript": "5.0.10",
+    "@graphql-codegen/typescript-resolvers": "5.1.8",
+    "@graphql-tools/schema": "10.0.33",
     "@types/chai": "4.3.11",
     "@types/chalk": "0.4.31",
     "@types/dotenv-flow": "3.3.3",
