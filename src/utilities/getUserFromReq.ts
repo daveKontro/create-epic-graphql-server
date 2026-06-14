@@ -7,7 +7,7 @@ import type { User } from 'types'
 
 const setDummySession = ({
   req,
-}:{
+}: {
   req: Request,
 }) => {
   // in a production app user info might 
@@ -26,7 +26,7 @@ const setDummySession = ({
 
 export const getUserFromReq = ({
   req,
-}:{
+}: {
   req: Request,
 }): User => {
   const session = setDummySession({ req })
