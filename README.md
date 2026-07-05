@@ -41,7 +41,7 @@ sample queries are provided later in this document
 ### mock database
 in order to get up and running quickly without the need to initially plug into a real database, this project provides a mock database via [json-server](https://www.npmjs.com/package/json-server)  
 
-the database starts when you run `npm run dev:db`, which automatically creates and runs of the file `db.json5`; the db file is seeded upon each startup from `db-seed.json`  
+the database starts when you run `npm run dev:db`, which automatically creates and runs off the file `db.json5`; the db file is seeded upon each startup from `db-seed.json`  
 
 see file `/src/config/db.ts` to understand how the database works; you will likely, eventually remove this file when you plug into a real database and replace the contents of `/src/models` with actual database models... that said, the provided pattern gives you scaffolding to build around  
 
