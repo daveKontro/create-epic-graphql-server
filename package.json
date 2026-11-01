@@ -18,6 +18,7 @@
     "test:watch:min": "mocha --require ts-node/register specs/**/*.ts --watch --watch-files src/**/*.ts,specs/**/*.ts --reporter min",
     "lint": "eslint src/**/*.{ts,json}",
     "lint:fix": "eslint --fix src/**/*.{ts,json}",
+    "typecheck": "tsc --noEmit",
     "prepare": "husky"
   },
   "keywords": [
@@ -70,13 +71,14 @@
     "winston": "3.17.0",
     "winston-daily-rotate-file": "5.0.0",
     "yargs": "17.7.2",
-    "zod": "3.24.4"
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "6.3.1",
     "@graphql-codegen/typescript": "5.0.10",
     "@graphql-codegen/typescript-resolvers": "5.1.8",
     "@graphql-tools/schema": "10.0.33",
+    "@parcel/watcher": "2.6.0",
     "@types/chai": "4.3.11",
     "@types/chalk": "0.4.31",
     "@types/dotenv-flow": "3.3.3",

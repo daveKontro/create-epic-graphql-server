@@ -1,8 +1,8 @@
 const path = require('path')
-const z = require('zod')
 const { log, logErr } = require('../utilities/logger')
 const { customerSchema } = require('../models/Customer')
 const { orderSchema } = require('../models/Order')
+import { z } from 'zod'
 import { DataSet } from '../types'
 import type {
   Customer,
@@ -155,10 +155,12 @@ export = {
           email: doc.email,
           phone: doc.phone,
         })
-      } catch (err: typeof z.ZodError | unknown) {
+      } catch (err: unknown) {
         if(err instanceof z.ZodError) {
-          err.issues.forEach((err: typeof z.ZodError, index: number) => {
-            log.error(`${err.path[index]} ${err.message}`, { index })
+          err.issues.forEach((issue, index) => {
+            const msg = `${issue.path.join('.')} ${issue.message}`
+
+            log.error(msg, { index })
           })
         } else {
           logErr({ header: 'customer parse error', err })
@@ -219,10 +221,12 @@ export = {
           status: doc.status,
           customerId: doc.customerId,
         })
-      } catch (err: typeof z.ZodError | unknown) {
+      } catch (err: unknown) {
         if (err instanceof z.ZodError) {
-          err.issues.forEach((err: typeof z.ZodError, index: number) => {
-            log.error(`${err.path[index]} ${err.message}`, { index })
+          err.issues.forEach((issue, index) => {
+            const msg = `${issue.path.join('.')} ${issue.message}`
+
+            log.error(msg, { index })
           })
         } else {
           logErr({ header: 'order parse error', err })

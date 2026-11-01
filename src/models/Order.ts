@@ -6,9 +6,9 @@ import {
 
 export const orderSchema = z.object({
   id: z.string().optional(),  // optional? let db add id on save
-  name: z.nativeEnum(OrderName),
+  name: z.enum(OrderName),
   notes: z.string().optional(),
-  status: z.nativeEnum(OrderStatus),
+  status: z.enum(OrderStatus),
   customerId: z.string(),
 })
 

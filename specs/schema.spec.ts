@@ -1,15 +1,16 @@
 const { expect } = require('chai')
 const request = require('supertest')
 const sinon = require('sinon')
-const express = require('express')
 const { createHandler } = require('graphql-http/lib/use/express')
 const { schema } = require('../src/schema/schema')
+import express from 'express'
 import type { SinonStub } from 'sinon'
+import type { Application } from 'express'
 
 describe('GraphQL Schema', () => {
   let saveStub: SinonStub
   let findStub: SinonStub
-  let app
+  let app: Application
 
   beforeEach(() => {
     // create fresh stubs for each test
