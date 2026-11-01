@@ -1,6 +1,6 @@
 {
   "name": "@epic-effx/create-epic-graphql-server",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "a configured graphql server",
   "main": "index.js",
   "bin": {
